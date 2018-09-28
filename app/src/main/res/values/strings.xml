@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MyChat</string>
+
+    <string name="lb_gender">Giới tính:</string>
+    <string name="lb_birthdate">Ngày sinh:</string>
+    <string name="action_register">ĐĂNG KÝ</string>
+    <string name="link_login">Đã có tài khoản ? Đăng nhập ngay tại đây !</string>
+    <string name="hint_fullname">Họ tên</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Mật khẩu</string>
+    <string name="hint_confirm_password">Nhắc lại mật khẩu</string>
+</resources>
