@@ -7,5 +7,5 @@
     android:gravity="center"
     android:textSize="@dimen/textSize_lb_large"
     android:textColor="@android:color/white"
-    android:background="#E43F3F"
+    android:background="@color/bgGenderRegister"
     android:padding="@dimen/padding_small"/>

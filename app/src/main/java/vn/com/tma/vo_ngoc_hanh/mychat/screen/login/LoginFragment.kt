@@ -1,6 +1,7 @@
 package vn.com.tma.vo_ngoc_hanh.mychat.screen.login
 
 
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -12,12 +13,18 @@ import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.fragment_login.*
 
 import vn.com.tma.vo_ngoc_hanh.mychat.R
+import vn.com.tma.vo_ngoc_hanh.mychat.base.validator.ValidatorManager
+import vn.com.tma.vo_ngoc_hanh.mychat.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        val binding = DataBindingUtil.inflate<FragmentLoginBinding>(inflater, R.layout.fragment_login, container, false)
+
+        binding.validationManager = ValidatorManager()
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

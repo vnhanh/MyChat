@@ -7,8 +7,16 @@
             type="vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.Account" />
 
         <variable
-            name="fullnameValidator"
-            type="vn.com.tma.vo_ngoc_hanh.mychat.screen.register.IValidator" />
+            name="password"
+            type="String" />
+
+        <variable
+            name="viewmodel"
+            type="vn.com.tma.vo_ngoc_hanh.mychat.screen.register.RegisterViewModel" />
+
+        <variable
+            name="validationManager"
+            type="vn.com.tma.vo_ngoc_hanh.mychat.base.validator.ValidatorManager" />
 
     </data>
 
@@ -41,8 +49,10 @@
 
             <!-- FullName Label -->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/til_name"
-                app:bindValidator="@{fullnameValidator}"
+                android:id="@+id/til_fullname"
+                app:bindValidatorManager="@{validationManager}"
+                app:validatorTag="@{@string/tag_val_fullname}"
+                app:error="@{@string/err_validate_fullname}"
                 style="@style/TextInputLayout.Login"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -51,8 +61,7 @@
 
                 <EditText
                     android:id="@+id/edt_fullname"
-                    app:bindValidator="@{fullnameValidator}"
-                    android:text="@{account.name}"
+                    android:text="@={account.name}"
                     style="@style/EditText.Login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -65,18 +74,22 @@
             <!-- Email Label -->
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_email"
+                app:bindValidatorManager="@{validationManager}"
+                app:validatorTag="@{@string/tag_val_email}"
+                app:error="@{@string/err_validate_email}"
                 style="@style/TextInputLayout.Login"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_name">
+                app:layout_constraintTop_toBottomOf="@id/til_fullname">
 
                 <EditText
                     android:id="@+id/input_email"
+                    android:text="@={account.email}"
                     style="@style/EditText.Login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_email"
-                    android:inputType="text"
+                    android:inputType="textEmailAddress"
                     android:theme="@style/EditText.Login" />
 
             </android.support.design.widget.TextInputLayout>
@@ -84,6 +97,9 @@
             <!-- Password Label -->
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_password"
+                app:bindValidatorManager="@{validationManager}"
+                app:validatorTag="@{@string/tag_val_password}"
+                app:error="@{@string/err_validate_password}"
                 style="@style/TextInputLayout.Login"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -91,6 +107,7 @@
 
                 <EditText
                     android:id="@+id/input_password"
+                    android:text="@={password}"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -104,6 +121,9 @@
             <!-- Confirm Password -->
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_confirm_password"
+                app:bindValidatorManager="@{validationManager}"
+                app:validatorTag="@{@string/tag_val_confirm_password}"
+                app:error="@{@string/err_validate_confirm_password}"
                 style="@style/TextInputLayout.Login"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -156,6 +176,7 @@
 
             <TextView
                 android:id="@+id/tv_birthdate"
+                android:text="@string/hint_birthdate"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/textSize_lb_large"
                 app:layout_constraintStart_toEndOf="@id/tv_lb_birthdate"
@@ -169,6 +190,7 @@
 
             <Button
                 android:id="@+id/btn_login"
+                android:onClick="@{() -> viewmodel.onSubmit(account, password)}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_x4"
@@ -180,7 +202,7 @@
                 android:text="@string/action_register"
                 android:textStyle="bold"
                 android:textSize="@dimen/textSize_lb_large"
-                android:background="@color/colorLoginButton"
+                android:background="@color/loginButton"
                 style="@style/Widget.AppCompat.Button.Colored"/>
 
             <TextView

@@ -9,4 +9,19 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Mật khẩu</string>
     <string name="hint_confirm_password">Nhắc lại mật khẩu</string>
+    <string name="hint_birthdate">Choose birthdate</string>
+    
+    <!--ERROR VALIDATION-->
+    <string name="err_validate_fullname">Minimum length of fullname is 2 characters</string>
+    <string name="err_validate_email">Wrong type email</string>
+    <string name="err_validate_password">Password must be greater than 4 characters</string>
+    <string name="err_validate_confirm_password">Confirm password must be same with password</string>
+
+    <!--BINDING VALIDATION-->
+    <string name="tag_val_fullname">fullname</string>
+    <string name="tag_val_email">email</string>
+    <string name="tag_val_password">password</string>
+    <string name="tag_val_confirm_password">confirm password</string>
+    <string name="tag_val_phone">phone</string>
+
 </resources>

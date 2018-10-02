@@ -1,99 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
-    android:background="#E43F3F"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".screen.login.LoginFragment">
+<layout>
+    <data>
 
-    <android.support.constraint.ConstraintLayout
-        android:padding="8dp"
+        <variable
+            name="validationManager"
+            type="vn.com.tma.vo_ngoc_hanh.mychat.base.validator.ValidatorManager" />
+
+    </data>
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/frameLayout"
+        android:background="@drawable/bg_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        tools:context=".screen.login.LoginFragment">
 
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_login_108_0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <android.support.constraint.ConstraintLayout
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <!-- Email Label -->
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_email"
-            style="@style/TextInputLayout.Login"
-            android:layout_marginTop="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/icon">
-
-            <EditText
-                android:id="@+id/input_email"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                style="@style/EditText.Login"
-                android:theme="@style/EditText.Login"/>
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_login_108_0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </android.support.design.widget.TextInputLayout>
+            <!-- Email Label -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_email"
+                app:bindValidatorManager="@{validationManager}"
+                app:validatorTag="@{@string/tag_val_email}"
+                app:error="@{@string/err_validate_email}"
+                style="@style/TextInputLayout.Login"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/icon">
 
-        <!-- Password Label -->
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_password"
-            style="@style/TextInputLayout.Login"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/til_email">
+                <EditText
+                    android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    style="@style/EditText.Login"
+                    android:theme="@style/EditText.Login"/>
 
-            <EditText
-                android:id="@+id/input_password"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:layout_width="match_parent"
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Password Label -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_password"
+                app:bindValidatorManager="@{validationManager}"
+                app:validatorTag="@{@string/tag_val_password}"
+                app:error="@{@string/err_validate_password}"
+                style="@style/TextInputLayout.Login"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_email">
+
+                <EditText
+                    android:id="@+id/input_password"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="Password"
+                    style="@style/EditText.Login"
+                    android:theme="@style/EditText.Login"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Password"
-                style="@style/EditText.Login"
-                android:theme="@style/EditText.Login"/>
+                android:layout_marginTop="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_password"
+                android:padding="12dp"
+                android:textColor="@android:color/white"
+                android:text="Login"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:background="#CC1D1D"
+                style="@style/Widget.AppCompat.Button.Colored"/>
 
-        </android.support.design.widget.TextInputLayout>
+            <TextView
+                android:id="@+id/tv_link_signup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_login"
+                android:text="No account yet? Create one"
+                android:gravity="center"
+                android:textSize="16dip"
+                android:textColor="@android:color/white"/>
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/til_password"
-            android:padding="12dp"
-            android:textColor="@android:color/white"
-            android:text="Login"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:background="#CC1D1D"
-            style="@style/Widget.AppCompat.Button.Colored"/>
+        </android.support.constraint.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/tv_link_signup"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_login"
-            android:text="No account yet? Create one"
-            android:gravity="center"
-            android:textSize="16dip"
-            android:textColor="@android:color/white"/>
+    </ScrollView>
 
-    </android.support.constraint.ConstraintLayout>
-
-</ScrollView>
+</layout>

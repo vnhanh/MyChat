@@ -22,7 +22,11 @@
         android:id="@+id/registerFragment"
         android:name="vn.com.tma.vo_ngoc_hanh.mychat.screen.register.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/nav_registerToLogin"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="vn.com.tma.vo_ngoc_hanh.mychat.screen.home.HomeFragment"

@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="colorStartLogin">#01A299</color>
-    <color name="colorEndLogin">#018786</color>
-    <color name="colorLoginButton">#017374</color>
+    <color name="startLogin">#01A299</color>
+    <color name="endLogin">#018786</color>
+    <color name="loginButton">#017374</color>
+    <color name="bgGenderRegister">#025f60</color>
 </resources>

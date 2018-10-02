@@ -24,9 +24,15 @@
     <style name="TextInputLayout.Login" parent="Widget.Design.TextInputLayout">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="hintTextAppearance">@style/HintTextStyle</item>
+        <item name="android:layout_marginTop">@dimen/margin_small</item>
         <item name="android:textColorHint">@android:color/white</item>
+        <item name="hintTextAppearance">@style/HintTextStyle</item>
+        <item name="errorTextAppearance">@style/TextInputLayout.ErrorTextAppearance</item>
+    </style>
+
+    <style name="TextInputLayout.ErrorTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#d90909</item>
+        <item name="android:textSize">@dimen/textSize_lb_normal</item>
     </style>
 
 </resources>

@@ -13,7 +13,10 @@ class ViewModelFactory : ViewModelProvider.NewInstanceFactory {
         private var INSTANCE:ViewModelFactory ?= null
 
         fun getInstance(app:Application) : ViewModelFactory{
-            return INSTANCE?:ViewModelFactory(app)
+            if (INSTANCE == null) {
+                INSTANCE = ViewModelFactory(app)
+            }
+            return INSTANCE!!
         }
 
         fun destroyInstance() {
