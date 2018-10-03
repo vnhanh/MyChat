@@ -24,4 +24,8 @@
     <string name="tag_val_confirm_password">confirm password</string>
     <string name="tag_val_phone">phone</string>
 
+    <string name="msg_registering">Đang đăng ký &#8230;</string>
+    <string name="toast_register_success">Đăng ký thành công ! Mời đăng nhập !</string>
+    <string name="toast_register_failed">Đăng ký thất bại !</string>
+
 </resources>

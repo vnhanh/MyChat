@@ -1,6 +1,7 @@
-package vn.com.tma.vo_ngoc_hanh.mychat.base.db.source
+package vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.source
 
 import android.arch.lifecycle.LiveData
+import io.reactivex.Observable
 import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.Account
 
 interface IAccountDataSource {
@@ -10,7 +11,7 @@ interface IAccountDataSource {
 
     fun getAccountByEmail(email:String): LiveData<Account>
 
-    fun addAccount(account: Account)
+    fun createAccount(account: Account, password:String) : Observable<Boolean>
 
     fun updateAccount(account: Account)
 

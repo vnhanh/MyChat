@@ -3,14 +3,14 @@ package vn.com.tma.vo_ngoc_hanh.mychat.screen.login
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.ViewModel
 import android.util.Log
 import vn.com.tma.vo_ngoc_hanh.mychat.base.db.AppDatabase
 import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.Account
 import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.asynctask.AddAccountAsyncTask
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.source.AccountLocalDataSource
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.source.AccountRepository
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.source.IAccountDataSource
+import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.source.AccountLocalDataSource
+import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.source.AccountRepository
+import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.source.IAccountDataSource
+import vn.com.tma.vo_ngoc_hanh.mychat.base.di.Injection
 import java.util.*
 
 class LoginViewModel : AndroidViewModel {
@@ -21,10 +21,7 @@ class LoginViewModel : AndroidViewModel {
     constructor(app: Application) : super(app){
         database = AppDatabase.getInstance(app)
 
-        val localDataSource = AccountLocalDataSource.getInstance(database.accountDAO())
-        if (localDataSource != null) {
-            repository = AccountRepository.getInstance(localDataSource)
-        }
+        repository = Injection.injectAccountRepository(AppDatabase.getInstance(app).accountDAO())
     }
 
     fun getAccounts(): LiveData<List<Account>>? {
@@ -33,7 +30,6 @@ class LoginViewModel : AndroidViewModel {
 
     fun addName(name: String) {
         val account = Account(name, true, Date(), "nghiamy15@gmail.com")
-        Log.d("LOG", "add new account in view model")
 
         AddAccountAsyncTask(repository).execute(account)
     }

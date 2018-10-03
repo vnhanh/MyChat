@@ -1,4 +1,4 @@
-package vn.com.tma.vo_ngoc_hanh.mychat.base.android_architecture
+package vn.com.tma.vo_ngoc_hanh.mychat.common.android_architecture
 
 import android.app.Application
 import android.arch.lifecycle.ViewModel
