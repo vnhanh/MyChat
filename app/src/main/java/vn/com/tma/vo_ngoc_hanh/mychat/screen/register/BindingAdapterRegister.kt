@@ -4,13 +4,12 @@ import android.R
 import android.app.DatePickerDialog
 import android.databinding.BindingAdapter
 import android.graphics.Color
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.Account
+import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.room.AccountLocal
 import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,25 +17,35 @@ import java.util.*
 class BindingAdapterRegister {
     companion object {
 
-        @BindingAdapter("app:setClearState")
+        @BindingAdapter("app:bindClearInputState")
         @JvmStatic
-        fun bindSetClearState(edt: EditText, isClear: Boolean) {
+        fun bindClearInputState(edt: EditText, isClear: Boolean) {
             edt.setText("")
+        }
+
+        @BindingAdapter("app:bindShowState")
+        @JvmStatic
+        fun bindShowState(view: View, isShow: Boolean) {
+            view.visibility = if(isShow) View.VISIBLE else View.GONE
+        }
+
+        @BindingAdapter("app:bindEnableState")
+        @JvmStatic
+        fun bindEnableState(view: View, isEnable: Boolean) {
+            view.isEnabled = isEnable
         }
 
         @BindingAdapter("app:bindAccountGender")
         @JvmStatic
-        fun bindGenderForAccount(spinner: Spinner, account: Account) {
+        fun bindGenderForAccount(spinner: Spinner, account: AccountLocal) {
             spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
 
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     when (position) {
-                        0 -> account.gender = false
+                        0 -> account.gender = true
 
-                        1 -> account.gender = true
+                        1 -> account.gender = false
                     }
                 }
             }
@@ -44,7 +53,7 @@ class BindingAdapterRegister {
 
         @BindingAdapter("app:bindBirthDate")
         @JvmStatic
-        fun bindBirthDate(view: TextView, account: Account) {
+        fun bindBirthDate(view: TextView, account: AccountLocal) {
             view.setOnClickListener{
                 val context = view.context
 

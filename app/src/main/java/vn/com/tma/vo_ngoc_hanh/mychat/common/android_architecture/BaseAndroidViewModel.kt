@@ -5,7 +5,7 @@ import android.arch.lifecycle.AndroidViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-open class BaseAndroidViewModel(app:Application) : AndroidViewModel(app) {
+abstract class BaseAndroidViewModel(app:Application) : AndroidViewModel(app) {
     private val disposable = CompositeDisposable()
 
     protected fun addDisposable(_disposable: Disposable){
@@ -16,4 +16,6 @@ open class BaseAndroidViewModel(app:Application) : AndroidViewModel(app) {
         super.onCleared()
         disposable.clear()
     }
+
+    abstract fun onCreate()
 }

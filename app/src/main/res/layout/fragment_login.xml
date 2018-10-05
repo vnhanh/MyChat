@@ -3,8 +3,20 @@
     <data>
 
         <variable
+            name="viewmodel"
+            type="vn.com.tma.vo_ngoc_hanh.mychat.screen.login.LoginViewModel" />
+
+        <variable
             name="validationManager"
             type="vn.com.tma.vo_ngoc_hanh.mychat.base.validator.ValidatorManager" />
+
+        <variable
+            name="email"
+            type="String" />
+
+        <variable
+            name="password"
+            type="String" />
 
     </data>
 
@@ -37,6 +49,7 @@
             <!-- Email Label -->
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_email"
+                app:bindEnableState="@{!viewmodel.isLoading}"
                 app:bindValidatorManager="@{validationManager}"
                 app:validatorTag="@{@string/tag_val_email}"
                 app:error="@{@string/err_validate_email}"
@@ -48,9 +61,10 @@
 
                 <EditText
                     android:id="@+id/input_email"
+                    android:text="@={email}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="@string/hint_email"
                     android:inputType="textEmailAddress"
                     style="@style/EditText.Login"
                     android:theme="@style/EditText.Login"/>
@@ -60,6 +74,7 @@
             <!-- Password Label -->
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_password"
+                app:bindEnableState="@{!viewmodel.isLoading}"
                 app:bindValidatorManager="@{validationManager}"
                 app:validatorTag="@{@string/tag_val_password}"
                 app:error="@{@string/err_validate_password}"
@@ -70,30 +85,48 @@
 
                 <EditText
                     android:id="@+id/input_password"
+                    android:text="@={password}"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:hint="Password"
+                    android:hint="@string/hint_password"
                     style="@style/EditText.Login"
                     android:theme="@style/EditText.Login"/>
 
             </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:id="@+id/btn_login"
+            <vn.com.tma.vo_ngoc_hanh.mychat.base.custom_view.CustomProgressView
+                android:id="@+id/prg_view"
+                app:bindShowState="@{viewmodel.isLoading}"
+                app:prg_view_text_color="@android:color/white"
+                app:prg_view_text_align="left"
+                app:prg_view_text_size="@dimen/textSize_lb_normal"
+                app:prg_view_message="@string/msg_signining"
+                android:layout_marginTop="@dimen/margin_x4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_password"
+                app:layout_constraintTop_toBottomOf="@id/til_password"/>
+
+            <Button
+                android:id="@+id/btn_login"
+                app:checkEnable="@{validationManager.isValidate}"
+                android:onClick="@{() -> viewmodel.onSubmit(email, password)}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                app:layout_goneMarginTop="@dimen/margin_x5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/prg_view"
                 android:padding="12dp"
                 android:textColor="@android:color/white"
-                android:text="Login"
+                android:text="@string/action_signin"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:background="#CC1D1D"
+                android:background="@color/loginButton"
                 style="@style/Widget.AppCompat.Button.Colored"/>
 
             <TextView
@@ -104,9 +137,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_login"
-                android:text="No account yet? Create one"
+                android:text="@string/action_link_signup"
                 android:gravity="center"
-                android:textSize="16dip"
+                android:textSize="@dimen/textSize_lb_small"
                 android:textColor="@android:color/white"/>
 
         </android.support.constraint.ConstraintLayout>

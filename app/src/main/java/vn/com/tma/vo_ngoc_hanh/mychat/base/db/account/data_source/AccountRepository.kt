@@ -1,14 +1,8 @@
-package vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.source
+package vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.data_source
 
 import android.arch.lifecycle.LiveData
-import android.util.Log
 import io.reactivex.Observable
-import io.reactivex.ObservableSource
-import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Function
-import io.reactivex.schedulers.Schedulers
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.Account
+import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.room.AccountLocal
 
 class AccountRepository private constructor(var localDataSource: IAccountDataSource, var remoteDataSource: IAccountDataSource) : IAccountDataSource {
 
@@ -27,35 +21,39 @@ class AccountRepository private constructor(var localDataSource: IAccountDataSou
         }
     }
 
-    override fun getAllAccounts(): LiveData<List<Account>> {
+    override fun getAllAccounts(): LiveData<List<AccountLocal>> {
         return localDataSource.getAllAccounts()
     }
 
-    override fun getAccountById(id: Int): LiveData<Account> {
+    override fun getAccountById(id: Int): LiveData<AccountLocal> {
         return localDataSource.getAccountById(id)
     }
 
-    override fun getAccountByEmail(email: String): LiveData<Account> {
+    override fun getAccountByEmail(email: String): LiveData<AccountLocal> {
         return localDataSource.getAccountByEmail(email)
     }
 
-    override fun createAccount(account: Account, password:String) : Observable<Boolean> {
-        return remoteDataSource.createAccount(account, password)
+    override fun registerOrAddAccount(account: AccountLocal, password:String) : Observable<Boolean> {
+        return remoteDataSource.registerOrAddAccount(account, password)
                 .flatMap({isSuccess -> if (isSuccess) {
 
-                    localDataSource.createAccount(account, password)
+                    localDataSource.registerOrAddAccount(account, password)
                         }else{
 
-                            Observable.just(false)
+                    Observable.just(false)
                         }
                 })
     }
 
-    override fun updateAccount(account: Account) {
+    override fun signin(email: String, password: String): Observable<Boolean> {
+        return remoteDataSource.signin(email, password)
+    }
+
+    override fun updateAccount(account: AccountLocal) {
         localDataSource.updateAccount(account)
     }
 
-    override fun deleteAccount(account: Account) {
+    override fun deleteAccount(account: AccountLocal) {
         localDataSource.deleteAccount(account)
     }
 

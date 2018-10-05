@@ -25,7 +25,14 @@
     <string name="tag_val_phone">phone</string>
 
     <string name="msg_registering">Đang đăng ký &#8230;</string>
-    <string name="toast_register_success">Đăng ký thành công ! Mời đăng nhập !</string>
-    <string name="toast_register_failed">Đăng ký thất bại !</string>
+    <string name="msg_register_success">Đăng ký thành công ! Bạn được đăng nhập tự động !</string>
+    <string name="msg_not_navigate_to_home">Không thể chuyển sang màn hình chính !</string>
+    <string name="msg_register_failed">Đăng ký thất bại !</string>
+
+    <string name="msg_signining">Đang đăng nhập &#8230;</string>
+    <string name="msg_signin_success">Đăng nhập thành công !</string>
+    <string name="msg_signin_failed">Đăng nhập thất bại !</string>
+    <string name="action_signin">ĐĂNG NHẬP</string>
+    <string name="action_link_signup">Chưa có tài khoản ? Đăng ký tại đây</string>
 
 </resources>

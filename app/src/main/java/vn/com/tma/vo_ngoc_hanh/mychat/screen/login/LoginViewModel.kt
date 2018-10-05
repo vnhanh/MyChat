@@ -1,36 +1,62 @@
 package vn.com.tma.vo_ngoc_hanh.mychat.screen.login
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
-import android.util.Log
+import android.arch.lifecycle.MutableLiveData
+import android.databinding.ObservableBoolean
+import com.google.firebase.auth.FirebaseAuth
+import io.reactivex.disposables.Disposable
 import vn.com.tma.vo_ngoc_hanh.mychat.base.db.AppDatabase
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.Account
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.asynctask.AddAccountAsyncTask
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.source.AccountLocalDataSource
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.source.AccountRepository
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.source.IAccountDataSource
+import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.data_source.IAccountDataSource
 import vn.com.tma.vo_ngoc_hanh.mychat.base.di.Injection
-import java.util.*
+import vn.com.tma.vo_ngoc_hanh.mychat.common.android_architecture.BaseAndroidViewModel
 
-class LoginViewModel : AndroidViewModel {
+class LoginViewModel(app:Application) : BaseAndroidViewModel(app) {
 
-    private lateinit var database:AppDatabase
-    private var repository: IAccountDataSource ?= null
+    private lateinit var repository: IAccountDataSource
 
-    constructor(app: Application) : super(app){
-        database = AppDatabase.getInstance(app)
+    var signinResult = MutableLiveData<Boolean>()
+    var clearInputState = ObservableBoolean(false)
+    var isLoading = ObservableBoolean(false)
 
+    init{
+        signinResult.value = false
         repository = Injection.injectAccountRepository(AppDatabase.getInstance(app).accountDAO())
     }
 
-    fun getAccounts(): LiveData<List<Account>>? {
-        return repository?.getAllAccounts()
+    override fun onCreate() {
+        val auth = FirebaseAuth.getInstance()
+        if (auth.currentUser != null) {
+            noticeLogined()
+        }
     }
 
-    fun addName(name: String) {
-        val account = Account(name, true, Date(), "nghiamy15@gmail.com")
+    fun onSubmit(email: String, password: String) {
+        showLoadingUI()
 
-        AddAccountAsyncTask(repository).execute(account)
+        addDisposable(setupSigninAction(email, password))
+    }
+
+    private fun setupSigninAction(email: String, password: String) : Disposable {
+        return repository.signin(email, password)
+                .subscribe { isSuccess ->
+                    hideLoadingUI()
+                    if (isSuccess) {
+                        noticeLogined()
+                    }else{
+                        clearInputState.set(!clearInputState.get())
+                    }
+                }
+    }
+
+    private fun noticeLogined() {
+        signinResult.value = true
+    }
+
+    private fun showLoadingUI() {
+        isLoading.set(true)
+    }
+
+    private fun hideLoadingUI() {
+        isLoading.set(false)
     }
 }

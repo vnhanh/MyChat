@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,7 @@ import vn.com.tma.vo_ngoc_hanh.mychat.R
 import vn.com.tma.vo_ngoc_hanh.mychat.base.custom_view.DialogCreater
 import vn.com.tma.vo_ngoc_hanh.mychat.common.adapter.SpinnerStringAdapter
 import vn.com.tma.vo_ngoc_hanh.mychat.common.android_architecture.ViewModelFactory
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.Account
+import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.room.AccountLocal
 import vn.com.tma.vo_ngoc_hanh.mychat.base.validator.ValidatorManager
 import vn.com.tma.vo_ngoc_hanh.mychat.databinding.FragmentRegisterBinding
 import java.util.*
@@ -30,11 +31,10 @@ class RegisterFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
         val binding = DataBindingUtil.inflate<FragmentRegisterBinding>(inflater, R.layout.fragment_register, container, false)
         val root = binding.root
 
-        val account = Account("", true, Date(), "")
+        val account = AccountLocal("", true, Date(), "")
         binding.account = account
 
         val validationManager = ValidatorManager()
@@ -59,7 +59,7 @@ class RegisterFragment : Fragment() {
     }
 
     private val prgMsg:String? by lazy { context?.getString(R.string.msg_registering) }
-    private val prgDialog:AlertDialog? by lazy { DialogCreater.create(context, "", prgMsg?:"", false) }
+    private val prgDialog:AlertDialog? by lazy { DialogCreater.createProgressDialog(context, "", prgMsg?:"", false) }
 
     private fun observeLoadingProgress() {
         viewmodel.isLoading.observe(this, Observer<Boolean>{
@@ -88,15 +88,27 @@ class RegisterFragment : Fragment() {
             if (it!= null) {
                 if (viewmodel.isRegistered) {
                     if (it.equals(true)) {
-                        Toast.makeText(context, R.string.toast_register_success, Toast.LENGTH_SHORT).show()
-                        val navController = Navigation.findNavController(activity!!, R.id.nav_host_fragment )
-                        navController.navigate(R.id.nav_registerToLogin)
+                        onRegisterSuccess()
                     }else{
-                        Toast.makeText(context, R.string.toast_register_failed, Toast.LENGTH_SHORT).show()
+                        onRegisterFailed()
                     }
                 }
             }
         })
+    }
+
+    private fun onRegisterSuccess() {
+        Toast.makeText(context, R.string.msg_register_success, Toast.LENGTH_SHORT).show()
+        if (activity != null) {
+            val navController = Navigation.findNavController(activity!!, R.id.nav_host_fragment )
+            navController.navigate(R.id.nav_registerToHome)
+        }else{
+            Toast.makeText(context, R.string.msg_not_navigate_to_home, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun onRegisterFailed() {
+        Toast.makeText(context, R.string.msg_register_failed, Toast.LENGTH_SHORT).show()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

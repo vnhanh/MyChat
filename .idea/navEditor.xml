@@ -57,6 +57,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="nav_registerToHome">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="nav_registerToLogin">
                               <value>
                                 <LayoutPositions />

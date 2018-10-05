@@ -4,7 +4,7 @@
 
         <variable
             name="account"
-            type="vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.Account" />
+            type="vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.room.AccountLocal" />
 
         <variable
             name="password"
@@ -61,8 +61,7 @@
 
                 <EditText
                     android:id="@+id/edt_fullname"
-                    android:text="@={account.name}"
-                    app:setClearState="@{viewmodel.isClearInput}"
+                    android:text="@={account.fullname}"
                     style="@style/EditText.Login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -109,6 +108,7 @@
                 <EditText
                     android:id="@+id/input_password"
                     android:text="@={password}"
+                    app:bindClearInputState="@{viewmodel.clearInputState}"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -132,6 +132,7 @@
 
                 <EditText
                     android:id="@+id/input_confirm_password"
+                    app:bindClearInputState="@{viewmodel.clearInputState}"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -3,19 +3,18 @@ package vn.com.tma.vo_ngoc_hanh.mychat.screen.login.recyclerview
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import vn.com.tma.vo_ngoc_hanh.mychat.R
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.Account
+import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.room.AccountLocal
 
 class LoginAdapter : RecyclerView.Adapter<LoginViewHolder> {
-    private lateinit var list : List<Account>
+    private lateinit var list : List<AccountLocal>
 
     constructor() : super(){
-        list = ArrayList<Account>()
+        list = ArrayList<AccountLocal>()
     }
 
-    fun addList(_list: List<Account>) {
+    fun addList(_list: List<AccountLocal>) {
         list = _list
         notifyDataSetChanged()
     }

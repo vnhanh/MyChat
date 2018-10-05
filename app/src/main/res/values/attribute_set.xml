@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomProgressView">
+        <attr name="prg_view_message" format="string" />
+        <attr name="prg_view_text_size" format="dimension" />
+        <attr name="prg_view_text_color" format="color" />
+        <attr name="prg_view_text_align">
+            <flag name="bottom" value="80" />
+            <flag name="center" value="17" />
+            <flag name="center_horizontal" value="1" />
+            <flag name="center_vertical" value="16" />
+            <flag name="left" value="3" />
+            <flag name="right" value="5" />
+            <flag name="top" value="48" />
+        </attr>
+        <attr name="prg_view_indicator_size" format="dimension" />
+        <attr name="prg_view_indicator_align_left" format="boolean" />
+    </declare-styleable>
+</resources>

@@ -2,10 +2,6 @@ package vn.com.tma.vo_ngoc_hanh.mychat.common.adapter
 
 import android.databinding.BindingAdapter
 import android.view.View
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.Spinner
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.Account
 import vn.com.tma.vo_ngoc_hanh.mychat.base.validator.IValidator
 import vn.com.tma.vo_ngoc_hanh.mychat.base.validator.ValidatorFactory
 import vn.com.tma.vo_ngoc_hanh.mychat.base.validator.ValidatorManager

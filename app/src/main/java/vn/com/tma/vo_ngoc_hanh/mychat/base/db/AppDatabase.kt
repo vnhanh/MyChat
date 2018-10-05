@@ -5,12 +5,12 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.Account
-import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.AccountDAO
+import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.room.AccountDAO
+import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.room.AccountLocal
 import vn.com.tma.vo_ngoc_hanh.mychat.base.db.message.Message
 import vn.com.tma.vo_ngoc_hanh.mychat.base.db.type_converter.DataConverter
 
-@Database(entities = [Account::class, Message::class], version = 1)
+@Database(entities = [AccountLocal::class, Message::class], version = 1)
 @TypeConverters(DataConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     companion object {
