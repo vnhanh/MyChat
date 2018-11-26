@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MyChat</string>
 
-    <string name="lb_gender">Giới tính:</string>
+    <string name="lb_gender">Tôi là:</string>
     <string name="lb_birthdate">Ngày sinh:</string>
     <string name="action_register">ĐĂNG KÝ</string>
     <string name="link_login">Đã có tài khoản ? Đăng nhập ngay tại đây !</string>
@@ -9,13 +9,14 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Mật khẩu</string>
     <string name="hint_confirm_password">Nhắc lại mật khẩu</string>
-    <string name="hint_birthdate">Choose birthdate</string>
-    
+    <string name="hint_birthdate">Ngày sinh</string>
+
     <!--ERROR VALIDATION-->
     <string name="err_validate_fullname">Minimum length of fullname is 2 characters</string>
     <string name="err_validate_email">Wrong type email</string>
     <string name="err_validate_password">Password must be greater than 4 characters</string>
     <string name="err_validate_confirm_password">Confirm password must be same with password</string>
+    <string name="err_not_submit_because_not_validated">You must fill required fields before submit</string>
 
     <!--BINDING VALIDATION-->
     <string name="tag_val_fullname">fullname</string>
@@ -34,5 +35,19 @@
     <string name="msg_signin_failed">Đăng nhập thất bại !</string>
     <string name="action_signin">ĐĂNG NHẬP</string>
     <string name="action_link_signup">Chưa có tài khoản ? Đăng ký tại đây</string>
+
+    <!--CUSTOM SEARCH VIEW-->
+    <string name="hint_input_custom_search_view">Tìm kiếm</string>
+
+    <string name="title_menu_home">Home</string>
+    <string name="title_menu_photograph">Photograph</string>
+    <string name="title_menu_setting">Setting</string>
+
+    <string name="title_tab_messages">TIN NHẮN</string>
+    <string name="title_tab_active_users">HOẠT ĐỘNG</string>
+    <string name="title_tab_chat_groups">NHÓM</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

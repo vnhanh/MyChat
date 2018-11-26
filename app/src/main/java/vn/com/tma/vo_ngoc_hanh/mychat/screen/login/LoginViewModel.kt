@@ -17,9 +17,11 @@ class LoginViewModel(app:Application) : BaseAndroidViewModel(app) {
     var signinResult = MutableLiveData<Boolean>()
     var clearInputState = ObservableBoolean(false)
     var isLoading = ObservableBoolean(false)
+    var validatedTrigger = MutableLiveData<Boolean>()
 
     init{
         signinResult.value = false
+        validatedTrigger.value = false
         repository = Injection.injectAccountRepository(AppDatabase.getInstance(app).accountDAO())
     }
 
@@ -30,10 +32,14 @@ class LoginViewModel(app:Application) : BaseAndroidViewModel(app) {
         }
     }
 
-    fun onSubmit(email: String, password: String) {
-        showLoadingUI()
+    fun onSubmit(email: String, password: String, isValidated:Boolean) {
+        if (!isValidated) {
+            validatedTrigger.value = !validatedTrigger.value!!
+        }else{
+            showLoadingUI()
 
-        addDisposable(setupSigninAction(email, password))
+            addDisposable(setupSigninAction(email, password))
+        }
     }
 
     private fun setupSigninAction(email: String, password: String) : Disposable {

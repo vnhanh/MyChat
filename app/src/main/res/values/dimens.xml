@@ -13,5 +13,14 @@
     <dimen name="margin_x5">40dp</dimen>
 
     <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_normal">8dp</dimen>
     <dimen name="padding_large">12dp</dimen>
+    <dimen name="padding_x2">16dp</dimen>
+
+    <dimen name="corner_normal">8dp</dimen>
+    <dimen name="corner_large">12dp</dimen>
+    <dimen name="corner_x2">16dp</dimen>
+
+    <dimen name="size_icon_menu_toolbar">24dp</dimen>
+    <dimen name="size_logo_toolbar">48dp</dimen>
 </resources>

@@ -84,5 +84,12 @@ class BindingAdapterRegister {
                 dialog.show()
             }
         }
+
+
+        @BindingAdapter("app:bindEnableStateForButton")
+        @JvmStatic
+        fun bindEnableStateForButton(view:View, enable:Boolean){
+            view.alpha = if(enable) 1f else 0.7f
+        }
     }
 }

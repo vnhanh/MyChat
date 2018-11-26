@@ -25,8 +25,8 @@ class AccountRepository private constructor(var localDataSource: IAccountDataSou
         return localDataSource.getAllAccounts()
     }
 
-    override fun getAccountById(id: Int): LiveData<AccountLocal> {
-        return localDataSource.getAccountById(id)
+    override fun getAccountById(uid: String): LiveData<AccountLocal> {
+        return localDataSource.getAccountById(uid)
     }
 
     override fun getAccountByEmail(email: String): LiveData<AccountLocal> {

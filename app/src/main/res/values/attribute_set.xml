@@ -16,4 +16,9 @@
         <attr name="prg_view_indicator_size" format="dimension" />
         <attr name="prg_view_indicator_align_left" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="CustomSearchView">
+
+    </declare-styleable>
+
 </resources>

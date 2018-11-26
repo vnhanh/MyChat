@@ -8,8 +8,8 @@ interface AccountDAO {
     @Query("SELECT * FROM accounts")
     fun getAllAccounts() : LiveData<List<AccountLocal>>
 
-    @Query("SELECT * FROM accounts where id = :id")
-    fun getAccountById(id:Int): LiveData<AccountLocal>
+    @Query("SELECT * FROM accounts where uid = :uid")
+    fun getAccountById(uid:String): LiveData<AccountLocal>
 
     @Query("SELECT * FROM accounts where email = :email")
     fun getAccountByEmail(email:String): LiveData<AccountLocal>

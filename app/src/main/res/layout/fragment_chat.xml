@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".screen.chat.ChatFragment">
+
+    <LinearLayout
+        android:id="@+id/toolbar_chat"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/menu_back"
+            android:src="@drawable/ic_back_24_0"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_x2"
+            android:layout_width="@dimen/size_icon_menu_toolbar"
+            android:layout_height="@dimen/size_icon_menu_toolbar" />
+
+        <ImageView
+            android:id="@+id/menu_logo"
+            android:layout_gravity="center_vertical"
+            android:layout_width="@dimen/size_logo_toolbar"
+            android:layout_height="@dimen/size_logo_toolbar"  />
+
+        <TextView
+            android:id="@+id/title_toolbar"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textSize_lb_large"
+            android:lines="1"
+            android:ellipsize="end"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_x2"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_chat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/divider_chat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+    <View
+        android:id="@+id/divider_chat"
+        android:background="@color/divider"
+        app:layout_constraintBottom_toTopOf="@id/group_composer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="1dp" />
+
+    <LinearLayout
+        android:id="@+id/group_composer"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edt_composer"
+            android:textSize="@dimen/textSize_lb_normal"
+            android:background="@android:color/transparent"
+            android:paddingStart="@dimen/padding_normal"
+            android:paddingEnd="@dimen/padding_normal"
+            android:paddingTop="@dimen/padding_small"
+            android:paddingBottom="@dimen/padding_small"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/btn_send"
+            android:src="@drawable/ic_no_send_24_0"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

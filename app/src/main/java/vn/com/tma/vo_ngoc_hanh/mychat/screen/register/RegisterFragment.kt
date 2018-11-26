@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_register.*
 
 import vn.com.tma.vo_ngoc_hanh.mychat.R
 import vn.com.tma.vo_ngoc_hanh.mychat.base.custom_view.DialogCreater
-import vn.com.tma.vo_ngoc_hanh.mychat.common.adapter.SpinnerStringAdapter
 import vn.com.tma.vo_ngoc_hanh.mychat.common.android_architecture.ViewModelFactory
 import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.room.AccountLocal
 import vn.com.tma.vo_ngoc_hanh.mychat.base.validator.ValidatorManager
@@ -34,7 +33,7 @@ class RegisterFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentRegisterBinding>(inflater, R.layout.fragment_register, container, false)
         val root = binding.root
 
-        val account = AccountLocal("", true, Date(), "")
+        val account = AccountLocal("", "", "", true, Date(), "", "")
         binding.account = account
 
         val validationManager = ValidatorManager()
@@ -51,6 +50,14 @@ class RegisterFragment : Fragment() {
         }
 
         return root
+    }
+
+
+
+    private fun setupOnClickListener() {
+        tv_link_signup.setOnClickListener {
+            it.findNavController().navigate(R.id.nav_registerToLogin)
+        }
     }
 
     private fun setupObservation() {
@@ -113,19 +120,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (context != null) {
-            val _genders = resources.getStringArray(R.array.genders)
-            val genders = ArrayList<String>()
-            for (i in 0..(_genders.size - 1)) {
-                genders.add(_genders[i])
-            }
-            val gendersAdapter = SpinnerStringAdapter(context!!, R.layout.item_gender, R.layout.item_gender, genders)
-            gendersAdapter.setDropDownViewResource(R.layout.item_gender)
-            sp_gender.adapter = gendersAdapter
 
-            tv_link_signup.setOnClickListener{
-                it.findNavController().navigate(R.id.nav_registerToLogin)
-            }
-        }
+        setupOnClickListener()
     }
 }

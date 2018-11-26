@@ -9,7 +9,9 @@ class AccountMapper {
     companion object {
         fun localToRemote(account: AccountLocal) : AccountRemote{
             val accountRemote = AccountRemote()
+            accountRemote.uid = account.uid
             accountRemote.fullName = account.fullname
+            accountRemote.iconUrl = account.iconUrl
             accountRemote.email = account.email
             accountRemote.gender = account.gender
             accountRemote.birthDate = account.birthDate.time

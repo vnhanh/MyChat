@@ -36,7 +36,7 @@ class AccountRemoteDataSource : IAccountDataSource {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getAccountById(id: Int): LiveData<AccountLocal> {
+    override fun getAccountById(uid: String): LiveData<AccountLocal> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -92,7 +92,7 @@ class AccountRemoteDataSource : IAccountDataSource {
         return Observable.create<Boolean>{obsEmitter->
             auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
-                        Log.d("LOG", "signin: " + task.isSuccessful)
+
                         if (task.isSuccessful) {
                             val uid = task.result.user.uid
                             obsEmitter.onNext(true)

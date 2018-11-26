@@ -7,14 +7,12 @@ import java.util.*
 
 @Entity(tableName = "accounts")
 data class AccountLocal(
+        @PrimaryKey
+        @ColumnInfo(name = "uid") var uid:String="",
         @ColumnInfo(name = "fullname") var fullname:String,
+        @ColumnInfo(name = "icon_url") var iconUrl:String,
         @ColumnInfo(name = "gender") var gender:Boolean,
         @ColumnInfo(name = "birth_date") var birthDate:Date,
-        @ColumnInfo(name = "email") var email:String
-) {
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    var id:Long=0
-
-    @ColumnInfo(name = "uid") var uid:String=""
-}
+        @ColumnInfo(name = "email") var email:String,
+        @ColumnInfo(name = "connections") var connections:String
+)

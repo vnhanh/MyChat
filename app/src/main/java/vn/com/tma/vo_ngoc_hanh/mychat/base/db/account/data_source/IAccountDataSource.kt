@@ -7,7 +7,7 @@ import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.room.AccountLocal
 interface IAccountDataSource {
     fun getAllAccounts() : LiveData<List<AccountLocal>>
 
-    fun getAccountById(id:Int): LiveData<AccountLocal>
+    fun getAccountById(uid:String): LiveData<AccountLocal>
 
     fun getAccountByEmail(email:String): LiveData<AccountLocal>
 

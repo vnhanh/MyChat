@@ -3,12 +3,15 @@ package vn.com.tma.vo_ngoc_hanh.mychat.screen.login
 
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.google.firebase.database.FirebaseDatabase
@@ -40,6 +43,8 @@ class LoginFragment : Fragment() {
 
         binding.viewmodel = viewmodel
         binding.validationManager = ValidatorManager()
+        binding.email = ""
+        binding.password = ""
 
         return binding.root
     }
@@ -51,8 +56,14 @@ class LoginFragment : Fragment() {
             it.findNavController().navigate(R.id.nav_loginToRegister)
         }
 
+        viewmodel.validatedTrigger.observe(this, Observer {trigger ->
+            val toast = Toast.makeText(context, R.string.err_not_submit_because_not_validated, Toast.LENGTH_SHORT)
+            val tv = toast.view.findViewById<TextView>(android.R.id.message)
+            tv.setTextColor(resources.getColor(R.color.colorError))
+            toast.show()
+        })
+
         viewmodel.signinResult.observe(this, Observer { isSigninSuccess ->
-            Log.d("LOG", "viewmodel - signinResult: " + isSigninSuccess)
             if (isSigninSuccess != null && isSigninSuccess) {
                 Navigation.findNavController(btn_login).navigate(R.id.nav_loginToHome)
             }

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".screen.login.LoginFragment">
+
     <data>
 
         <variable
@@ -21,19 +26,22 @@
     </data>
 
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/frameLayout"
         android:background="@drawable/bg_login"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".screen.login.LoginFragment">
+        android:layout_height="match_parent">
 
         <android.support.constraint.ConstraintLayout
-            android:padding="8dp"
+            android:padding="@dimen/padding_x2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/gl_top_field_input"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                app:layout_constraintGuide_begin="400dp"/>
 
             <ImageView
                 android:id="@+id/icon"
@@ -47,54 +55,40 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <!-- Email Label -->
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/til_email"
-                app:bindEnableState="@{!viewmodel.isLoading}"
+            <EditText
+                android:id="@+id/input_email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/input_password"
+                android:layout_marginBottom="@dimen/margin_x4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 app:bindValidatorManager="@{validationManager}"
                 app:validatorTag="@{@string/tag_val_email}"
                 app:error="@{@string/err_validate_email}"
-                style="@style/TextInputLayout.Login"
-                android:layout_marginTop="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/icon">
-
-                <EditText
-                    android:id="@+id/input_email"
-                    android:text="@={email}"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hint_email"
-                    android:inputType="textEmailAddress"
-                    style="@style/EditText.Login"
-                    android:theme="@style/EditText.Login"/>
-
-            </android.support.design.widget.TextInputLayout>
+                android:hint="@string/hint_email"
+                android:text="@={email}"
+                android:inputType="textEmailAddress"
+                style="@style/EditText.Login"
+                android:theme="@style/EditText.Login"/>
 
             <!-- Password Label -->
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/til_password"
-                app:bindEnableState="@{!viewmodel.isLoading}"
+            <EditText
+                android:id="@+id/input_password"
+                android:text="@={password}"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/gl_top_field_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 app:bindValidatorManager="@{validationManager}"
                 app:validatorTag="@{@string/tag_val_password}"
                 app:error="@{@string/err_validate_password}"
-                style="@style/TextInputLayout.Login"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_email">
-
-                <EditText
-                    android:id="@+id/input_password"
-                    android:text="@={password}"
-                    android:textCursorDrawable="@drawable/color_cursor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:hint="@string/hint_password"
-                    style="@style/EditText.Login"
-                    android:theme="@style/EditText.Login"/>
-
-            </android.support.design.widget.TextInputLayout>
+                android:inputType="textPassword"
+                android:hint="@string/hint_password"
+                style="@style/EditText.Login"
+                android:theme="@style/EditText.Login"/>
 
             <vn.com.tma.vo_ngoc_hanh.mychat.base.custom_view.CustomProgressView
                 android:id="@+id/prg_view"
@@ -108,12 +102,12 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_password"/>
+                app:layout_constraintTop_toBottomOf="@id/input_password"/>
 
             <Button
                 android:id="@+id/btn_login"
-                app:checkEnable="@{validationManager.isValidate}"
-                android:onClick="@{() -> viewmodel.onSubmit(email, password)}"
+                app:bindEnableStateForButton="@{validationManager.isValidate}"
+                android:onClick="@{() -> viewmodel.onSubmit(email, password, validationManager.isValidate)}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_normal"
@@ -126,7 +120,7 @@
                 android:text="@string/action_signin"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:background="@color/loginButton"
+                android:background="@drawable/bg_btn_submit_authenticate"
                 style="@style/Widget.AppCompat.Button.Colored"/>
 
             <TextView

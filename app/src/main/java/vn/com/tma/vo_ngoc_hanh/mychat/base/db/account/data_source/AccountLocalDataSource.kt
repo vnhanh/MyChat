@@ -26,8 +26,8 @@ class AccountLocalDataSource private constructor(var dao: AccountDAO) : IAccount
         return dao.getAllAccounts()
     }
 
-    override fun getAccountById(id: Int): LiveData<AccountLocal> {
-        return dao.getAccountById(id)
+    override fun getAccountById(uid: String): LiveData<AccountLocal> {
+        return dao.getAccountById(uid)
     }
 
     override fun getAccountByEmail(email: String): LiveData<AccountLocal> {

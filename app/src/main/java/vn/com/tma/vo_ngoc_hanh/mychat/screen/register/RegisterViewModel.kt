@@ -36,22 +36,22 @@ class RegisterViewModel(app:Application) : BaseAndroidViewModel(app){
 
         // 6 years and 8 months (02/2012 -> 10/2018)
         addDisposable(
-            repository.register(account, password)
+            repository.registerOrAddAccount(account, password)
             .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
             .subscribe({isSuccess ->
 
-                    changeUIOnReceiveRegisterResult()
+                    changeUIBaseReceiveRegisterResult()
                     registerResult.value = true
                 }, {e ->
                     Log.d("LOG", "RegisterViewModel():onSubmit:register error !!!: " + e.message)
 
-                    changeUIOnReceiveRegisterResult()
+                    changeUIBaseReceiveRegisterResult()
                     registerResult.value = false
                 }
         ))
     }
 
-    private fun changeUIOnReceiveRegisterResult() {
+    private fun changeUIBaseReceiveRegisterResult() {
         hideLoadingUI()
         clearInputs()
     }

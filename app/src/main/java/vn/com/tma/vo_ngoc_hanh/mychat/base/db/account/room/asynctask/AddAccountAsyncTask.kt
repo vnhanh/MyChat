@@ -5,6 +5,9 @@ import io.reactivex.ObservableEmitter
 import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.room.AccountLocal
 import vn.com.tma.vo_ngoc_hanh.mychat.base.db.account.data_source.IAccountDataSource
 
+/**
+ * Add account to local database
+ */
 class AddAccountAsyncTask(var dataSource: IAccountDataSource?) : AsyncTask<AccountLocal, Void, Boolean>() {
     private var emitter: ObservableEmitter<Boolean>?=null
 
@@ -15,7 +18,8 @@ class AddAccountAsyncTask(var dataSource: IAccountDataSource?) : AsyncTask<Accou
     override fun doInBackground(vararg params: AccountLocal?): Boolean {
         val account = params[0] as AccountLocal
 
-        dataSource?.addAccount(account)
+        // ignore password since local database does not need to save it
+        dataSource?.registerOrAddAccount(account, "")
         return true
     }
 
